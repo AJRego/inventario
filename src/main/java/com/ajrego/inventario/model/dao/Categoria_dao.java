@@ -1,7 +1,6 @@
 
 package com.ajrego.inventario.model.dao;
 
-import com.ajrego.inventario.model.database.DatabaseSQLite;
 import com.ajrego.inventario.model.domain.Categoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,21 +10,25 @@ import java.util.logging.Logger;
 
 public class Categoria_dao {
     
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+    private Connection con;
     
-    DatabaseSQLite connection = new DatabaseSQLite();
+    public Connection getConnection(){        
+        return con;
+    }
+    
+    public void setConnection(Connection con){
+        this.con = con;
+    }
     
     public boolean insert(Categoria categoria){
         
-        String query = "INSERT INTO CATEGORIA (ID, Categoria, Descripcion) VALUES (?,?,?)";
+        String query = "INSERT INTO CATEGORIA (Categoria, Descripcion) VALUES (?,?,?)";
         
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
-            ps.setInt(1, categoria.getID());
-            ps.setString(2, categoria.getCategoria());
-            ps.setString(3, categoria.getDescripcion());
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, categoria.getCategoria());
+            ps.setString(2, categoria.getDescripcion());
             ps.execute();
             return true;         
             
@@ -33,8 +36,6 @@ public class Categoria_dao {
             Logger.getLogger(Categoria_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
             
-        }finally{
-            connection.close((Connection) connection);
         }
         
     }
@@ -45,7 +46,7 @@ public class Categoria_dao {
         
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
+            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, categoria.getCategoria());
             ps.setString(2, categoria.getDescripcion());
             ps.setInt(3, categoria.getID());
@@ -56,8 +57,6 @@ public class Categoria_dao {
             Logger.getLogger(Categoria_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
             
-        }finally{            
-            connection.close((Connection) connection);
         }
     }
     
@@ -67,7 +66,7 @@ public class Categoria_dao {
         
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
+            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, categoria.getID());
             ps.execute();
             return true;
@@ -76,8 +75,6 @@ public class Categoria_dao {
             Logger.getLogger(Categoria_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
             
-        }finally{
-            connection.close((Connection) connection);
         }
     }
     

@@ -1,7 +1,6 @@
 
 package com.ajrego.inventario.model.dao;
 
-import com.ajrego.inventario.model.database.DatabaseSQLite;
 import com.ajrego.inventario.model.domain.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,27 +10,31 @@ import java.util.logging.Logger;
 
 public class Cliente_dao {
     
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+    private Connection con;
     
-    DatabaseSQLite connection = new DatabaseSQLite();
+    public Connection getConnection(){        
+        return con;
+    }
+    
+    public void setConnection(Connection con){
+        this.con = con;
+    }
     
     public boolean insert(Cliente cliente){
         
-        String query = "INSERT INTO CLIENTE (ID, Cedula, Nombre, Telefono, Correo, Direccion, "
-                + "FechaIngreso, FechaSalida) VALUES (?,?,?,?,?,?,?,?)";
-        
+        String query = "INSERT INTO CLIENTE (Cedula, Nombre, Telefono, Correo, Direccion, "
+                + "FechaIngreso, FechaSalida) VALUES (?,?,?,?,?,?,?)";
+  
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
-            ps.setInt(1, cliente.getID());
-            ps.setInt(2, cliente.getCedula());
-            ps.setString(3, cliente.getNombre());
-            ps.setInt(4, cliente.getTelefono());
-            ps.setString(5, cliente.getCorreo());
-            ps.setString(6, cliente.getDireccion());
-            ps.setString(7, cliente.getFechaIngreso().toString());
-            ps.setString(8, cliente.getFechaSalida().toString());
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, cliente.getCedula());
+            ps.setString(2, cliente.getNombre());
+            ps.setInt(3, cliente.getTelefono());
+            ps.setString(4, cliente.getCorreo());
+            ps.setString(5, cliente.getDireccion());
+            ps.setString(6, cliente.getFechaIngreso().toString());
+            ps.setString(7, cliente.getFechaSalida().toString());
             ps.execute();
             return true;
             
@@ -39,10 +42,7 @@ public class Cliente_dao {
             Logger.getLogger(Cliente_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
             
-        }finally{
-            connection.close((Connection) connection);
         }
-
     }
     
     public boolean update(Cliente cliente){
@@ -52,7 +52,7 @@ public class Cliente_dao {
         
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
+            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
             ps.setInt(3, cliente.getTelefono());
@@ -68,8 +68,6 @@ public class Cliente_dao {
             Logger.getLogger(Cliente_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
             
-        }finally{
-            connection.close((Connection) connection);
         }
         
     }
@@ -80,7 +78,7 @@ public class Cliente_dao {
         
         try {
             
-            ps = (PreparedStatement) connection.connect(query);
+            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, cliente.getID());
             ps.execute();
             return true;
@@ -88,8 +86,6 @@ public class Cliente_dao {
         } catch (Exception e) {
             Logger.getLogger(Cliente_dao.class.getName()).log(Level.SEVERE, null, e);
             return false;
-        }finally{
-            connection.close((Connection) connection);
         }
         
     }
