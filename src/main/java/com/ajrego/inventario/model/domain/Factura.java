@@ -1,6 +1,4 @@
 package com.ajrego.inventario.model.domain;
-
-public class Factura {
    
 import java.time.LocalDate;
 import javafx.beans.property.FloatProperty;
