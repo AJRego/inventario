@@ -22,11 +22,10 @@ public class Categoria_dao {
     
     public boolean insert(Categoria categoria){
         
-        String query = "INSERT INTO CATEGORIA (Categoria, Descripcion) VALUES (?,?,?)";
+        String query = "INSERT INTO CATEGORIA (Categoria, Descripcion) VALUES (?,?)";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, categoria.getCategoria());
             ps.setString(2, categoria.getDescripcion());
             ps.execute();
@@ -44,9 +43,8 @@ public class Categoria_dao {
         
         String query = "UPDATE CATEGORIA SET Categoria=?, Descripcion=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, categoria.getCategoria());
             ps.setString(2, categoria.getDescripcion());
             ps.setInt(3, categoria.getID());
@@ -64,9 +62,8 @@ public class Categoria_dao {
         
         String query = "DELETE FROM CATEGORIA WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, categoria.getID());
             ps.execute();
             return true;

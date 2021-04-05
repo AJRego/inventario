@@ -26,9 +26,8 @@ public class Proveedor_dao {
         String query = "INSERT INTO PROVEEDOR (Nombre, Telefono, Correo,"
                 + "FechaIngreso, FechaSalida) VALUES (?,?,?,?,?)";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, proveedor.getNombre());
             ps.setInt(2, proveedor.getTelefono());
             ps.setString(3, proveedor.getCorreo());
@@ -51,9 +50,8 @@ public class Proveedor_dao {
         String query = "UPDATE PROVEEDOR SET Cedula=?, Nombre=?, Telefono=?, Correo=?"
                         + "Direccion=?, FechaIngreso=?, FechaSalida=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, proveedor.getNombre());
             ps.setInt(2, proveedor.getTelefono());
             ps.setString(3, proveedor.getCorreo());
@@ -75,9 +73,8 @@ public class Proveedor_dao {
         
          String query = "DELETE FROM PROVEEDOR WHERE ID=?";
          
-         try {
+         try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, proveedor.getID());
             ps.execute();
             return true;

@@ -24,9 +24,8 @@ public class DetalleFactura_dao {
         
         String query = "INSERT INTO DETALLE_FACTURA(ProductoID, FacturaID, Cantidad) VALUES (?,?,?)";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, Dfactura.getProductoID());
             ps.setInt(2, Dfactura.getFacturaID());
             ps.setInt(3, Dfactura.getCantidad());
@@ -43,9 +42,8 @@ public class DetalleFactura_dao {
         
         String query = "UPDATE DETALLE_FACTURA SET ProductoID=?, FActuraID=?, Cantidad=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, Dfactura.getProductoID());
             ps.setInt(2, Dfactura.getFacturaID());
             ps.setInt(3, Dfactura.getCantidad());
@@ -64,9 +62,8 @@ public class DetalleFactura_dao {
         
         String query = "DELETE FROM DETALLE_FACTURA WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, Dfactura.getID());
             ps.execute();
             return true;

@@ -25,9 +25,8 @@ public class Producto_dao {
         String query = "INSERT INTO PRODUCTO(Nombre, Precio, Stock, FechaDeIngreso, FechaDeVencimiento,"
                 + "Devuelto, QR, CategoriaID, ProveedorID) VALUES (?,?,?,?,?,?,?,?,?)";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             ps.setInt(3, producto.getStock());
@@ -52,9 +51,8 @@ public class Producto_dao {
         String query = "UPDATE PRODUCTO SET Nombre=?, Precio=?, Stock=?, FechaDeIngreso=?,"
                 + "FechaDeVencimiento=?, Devuelto=?, QR=?, CategoriaID=?, ProveedorID=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             ps.setInt(3, producto.getStock());
@@ -78,9 +76,8 @@ public class Producto_dao {
         
         String query = "DELETE FROM PRODUCTO WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, producto.getID());
             ps.execute();
             return true;

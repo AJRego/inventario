@@ -24,9 +24,8 @@ public class Factura_dao {
         
         String query = "INSERT INTO FACTURA(Fecha, ClienteID, Total, Estado, QR) VALUES (?,?,?,?,?)";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, factura.getFecha().toString());
             ps.setInt(2, factura.getClienteID());
             ps.setDouble(3, factura.getTotal());
@@ -45,9 +44,8 @@ public class Factura_dao {
         
         String query = "UPDATE FACTURA SET Fecha=?, ClienteID=?, Total=?, Estado=?, QR=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, factura.getFecha().toString());
             ps.setInt(2, factura.getClienteID());
             ps.setDouble(3, factura.getTotal());
@@ -68,9 +66,8 @@ public class Factura_dao {
         
         String query = "DELETE FROM FACTURA WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, factura.getID());
             ps.execute();
             return true;

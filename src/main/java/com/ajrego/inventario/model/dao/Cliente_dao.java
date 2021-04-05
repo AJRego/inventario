@@ -25,9 +25,8 @@ public class Cliente_dao {
         String query = "INSERT INTO CLIENTE (Cedula, Nombre, Telefono, Correo, Direccion, "
                 + "FechaIngreso, FechaSalida) VALUES (?,?,?,?,?,?,?)";
   
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
             ps.setInt(3, cliente.getTelefono());
@@ -50,9 +49,8 @@ public class Cliente_dao {
         String query = "UPDATE CLIENTE SET Cedula=?, Nombre=?, Telefono=?, Correo=?"
                         + "Direccion=?, FechaIngreso=?, FechaSalida=? WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, cliente.getCedula());
             ps.setString(2, cliente.getNombre());
             ps.setInt(3, cliente.getTelefono());
@@ -76,9 +74,8 @@ public class Cliente_dao {
         
         String query = "DELETE FROM CLIENTE WHERE ID=?";
         
-        try {
+        try (PreparedStatement ps = con.prepareStatement(query)){
             
-            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, cliente.getID());
             ps.execute();
             return true;
