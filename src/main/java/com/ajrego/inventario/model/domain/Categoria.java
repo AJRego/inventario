@@ -7,19 +7,19 @@ import javafx.beans.property.StringProperty;
 
 public class Categoria {
     private final IntegerProperty ID;
-    private final StringProperty Categoria;
-    private final StringProperty Descripcion;
+    private final StringProperty categoria;
+    private final StringProperty descripcion;
     
     public Categoria(){
         this.ID = new SimpleIntegerProperty();
-        this.Categoria = new SimpleStringProperty();
-        this.Descripcion = new SimpleStringProperty();
+        this.categoria = new SimpleStringProperty();
+        this.descripcion = new SimpleStringProperty();
     }
     
-    public Categoria(int ID, String Categoria, String Descripcion){
+    public Categoria(int ID, String categoria, String descripcion){
         this.ID = new SimpleIntegerProperty(ID);
-        this.Categoria = new SimpleStringProperty(Categoria);
-        this.Descripcion = new SimpleStringProperty(Descripcion);
+        this.categoria = new SimpleStringProperty(categoria);
+        this.descripcion = new SimpleStringProperty(descripcion);
     }
     
     public int getID(){
@@ -35,26 +35,26 @@ public class Categoria {
     }
     
     public String getCategoria(){
-        return Categoria.get();
+        return categoria.get();
     }
     
-    public void setCategoria(String Categoria){
-        this.Categoria.set(Categoria);
+    public void setCategoria(String categoria){
+        this.categoria.set(categoria);
     }
     
-    public StringProperty CategoriaProperty(){
-        return Categoria;
+    public StringProperty categoriaProperty(){
+        return categoria;
     }
     
     public String getDescripcion(){
-        return Descripcion.get();
+        return descripcion.get();
     }
     
-    public void setDescripcion(String Descripcion){
-        this.Descripcion.set(Descripcion);
+    public void setDescripcion(String descripcion){
+        this.descripcion.set(descripcion);
     }
     
-    public StringProperty DescripcionProperty(){
-        return Descripcion;
+    public StringProperty descripcionProperty(){
+        return descripcion;
     }
 }
