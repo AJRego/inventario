@@ -18,7 +18,7 @@ public class Categoria_dao {
     
     public boolean insert(Categoria categoria){
         
-        String query = "INSERT INTO CATEGORIA (ID, Categoria, Descripcion) VALUES (???)";
+        String query = "INSERT INTO CATEGORIA (ID, Categoria, Descripcion) VALUES (?,?,?)";
         
         try {
             
