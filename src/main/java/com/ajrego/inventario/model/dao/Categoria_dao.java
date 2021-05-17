@@ -48,6 +48,7 @@ public class Categoria_dao {
             ps = (PreparedStatement) connection.connect(query);
             ps.setString(1, categoria.getCategoria());
             ps.setString(2, categoria.getDescripcion());
+            ps.setInt(3, categoria.getID());
             ps.execute();
             return true;
             

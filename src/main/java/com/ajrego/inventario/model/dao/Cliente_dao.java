@@ -60,6 +60,7 @@ public class Cliente_dao {
             ps.setString(5, cliente.getDireccion());
             ps.setString(6, cliente.getFechaIngreso().toString());
             ps.setString(7, cliente.getFechaSalida().toString());
+            ps.setInt(8, cliente.getID());
             ps.execute();
             return true;
             
