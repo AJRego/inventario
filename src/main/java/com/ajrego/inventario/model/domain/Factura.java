@@ -1,9 +1,5 @@
 package com.ajrego.inventario.model.domain;
 
-<<<<<<< HEAD
-public class Factura {
-   
-=======
 import java.time.LocalDate;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.IntegerProperty;
@@ -13,7 +9,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+   
 public class Factura {
     private final IntegerProperty ID;
     private final ObjectProperty<LocalDate> fecha;
@@ -111,5 +107,4 @@ public class Factura {
     public StringProperty QRProperty(){
         return QR;
     }
->>>>>>> b6887030ae5bd0ac9461c74b00fabcea8caae891
 }
